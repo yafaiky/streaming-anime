@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import AnimeDetails from "./pages/AnimeDetails";
-import MangaDetails from "./pages/MangaDetails";
 import TopAnimeManga from "./components/TopAnimeManga";
 import SearchPage from "./pages/SearchPage";
 
@@ -14,7 +13,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/anime/:id" element={<AnimeDetails />} />
-          <Route path="/manga/:id" element={<MangaDetails />} />
           <Route path="/top-anime-manga" element={<TopAnimeManga />} />
           <Route path="/search" element={<SearchPage />} />
         </Routes>

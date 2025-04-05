@@ -1,84 +1,81 @@
-import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom"; // Assuming you're using react-router for navigation
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-const AnimeCarousel = () => {
-  const [animeList, setAnimeList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export default function AnimeCarousel() {
+  const [animes, setAnimes] = useState([]);
 
   useEffect(() => {
-    const fetchRandomAnime = async () => {
+    const fetchAnimesWithFullData = async () => {
       try {
-        const requests = Array.from({ length: 6 }, () =>
-          fetch(`${import.meta.env.VITE_ANIME_API_BASE_URL}/random/anime`).then((res) => res.json())
+        const topAnimeRes = await axios.get("https://api.jikan.moe/v4/top/anime");
+        const topAnimes = topAnimeRes.data.data.slice(0, 5);
+
+        const fullData = await Promise.all(
+          topAnimes.map(async (anime) => {
+            try {
+              const res = await axios.get(`https://api.jikan.moe/v4/anime/${anime.mal_id}/full`);
+              return res.data.data;
+            } catch (err) {
+              console.error(`Failed to fetch full data for anime ID ${anime.mal_id}`);
+              return anime;
+            }
+          })
         );
 
-        const responses = await Promise.all(requests);
-        const randomAnimes = responses.map((data) => data.data);
-
-        setAnimeList(randomAnimes);
-        setLoading(false); // Set loading to false after data is fetched
-      } catch (error) {
-        setError("Error fetching random anime");
-        setLoading(false); // Set loading to false if there is an error
+        setAnimes(fullData);
+      } catch (err) {
+        console.error("Failed to fetch anime full data:", err);
       }
     };
 
-    fetchRandomAnime();
+    fetchAnimesWithFullData();
   }, []);
 
-  if (loading) {
-    return <div className="text-sm font-bold"> Loading...</div>; // Display loading state
-  }
-
-  if (error) {
-    return <div>{error}</div>; // Display error state
-  }
-
   return (
-    <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="carousel">
-      {/* Indicators */}
-      <div className="carousel-indicators">
-        {animeList.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            data-bs-target="#carouselExampleCaptions"
-            data-bs-slide-to={index}
-            className={index === 0 ? "active" : ""}
-            aria-current={index === 0 ? "true" : "false"}
-            aria-label={`Slide ${index + 1}`}
-          ></button>
-        ))}
-      </div>
-
-      {/* Carousel Items */}
-      <div className="carousel-inner">
-        {animeList.map((anime, index) => (
-          <div key={anime.mal_id} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-            <Link to={`/anime/${anime.mal_id}`} className="text-decoration-none">
-              <img src={anime.images.webp.image_url} className="d-block w-100" alt={anime.title} />
-              <div className="carousel-caption d-none d-md-block bg-dark bg-opacity-75 p-3 rounded">
-                <h5>{anime.title}</h5>
-                <p>⭐ {anime.rating || "N/A"} | 📺 {anime.episodes || "Unknown"} episodes</p>
+    <div className="carousel-container">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 5000 }}
+        loop
+        className="swiper-carousel"
+      >
+        {animes.map((anime, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className="slide"
+              style={{
+                backgroundImage: `url(${anime.images.jpg.large_image_url})`,
+              }}
+            >
+              <div className="overlay" />
+              <div className="slide-content">
+                <h2 className="title">{anime.title}</h2>
+                <p className="synopsis">{anime.synopsis}</p>
+                <p className="score">Score: {anime.score || "N/A"}</p>
+                {anime.streaming && anime.streaming.length > 0 ? (
+                  <a
+                    href={anime.streaming[0].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="watch-button"
+                  >
+                    Watch on {anime.streaming[0].name}
+                  </a>
+                ) : (
+                  <span className="no-stream">No streaming link available</span>
+                )}
               </div>
-            </Link>
-          </div>
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
-
-      {/* Controls */}
-      <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        <span className="visually-hidden">Next</span>
-      </button>
+      </Swiper>
     </div>
   );
-};
-
-export default AnimeCarousel;
+}

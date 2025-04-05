@@ -38,14 +38,7 @@ function Navbar() {
         >
           Top Anime
         </ScrollLink>
-        <ScrollLink
-          to="top-manga"
-          smooth={true}
-          duration={100}
-          className="hover:text-gray-400"
-        >
-          Top Manga
-        </ScrollLink>
+        
         <ScrollLink
           to="top-characters"
           smooth={true}
