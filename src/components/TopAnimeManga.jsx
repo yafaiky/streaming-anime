@@ -31,7 +31,7 @@ const TopAnime = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-10 py-2 text-black">
+    <div className="container mx-auto px-7 py-4 text-black">
       <div id="top-anime">
         <h4 className="text-2xl font-bold mb-4">Top Anime</h4>
 
