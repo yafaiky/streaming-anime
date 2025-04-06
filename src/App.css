@@ -13,6 +13,21 @@
   height: 500px;
   overflow: hidden;
 }
+.swiper-button-prev {
+  display: none;
+}
+
+.swiper-button-next {
+  display: none;
+}
+
+.grid.grid-cols-2.md:grid-cols-3.lg:grid-cols-5.gap-4 {
+  justify-items: center;
+}
+
+.flex.items-center.gap-4 {
+  gap: 32px;
+}
 
 .swiper-carousel {
   height: 100%;
