@@ -5,9 +5,9 @@ import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-[#0a0a1a]">
       <AnimeCarousel />
-      <TopAnimeManga/>
+      <TopAnimeManga />
       <TopCharacters />
       <Footer />
     </div>

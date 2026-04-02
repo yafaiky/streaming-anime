@@ -1,30 +1,129 @@
+import { FaTwitter, FaYoutube, FaFacebook, FaGithub, FaHeart, FaDiscord } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 const Footer = () => {
-    return (
-      <footer className="w-full bg-black text-white p-4 flex justify-between items-center">
-        <aside className="flex items-center gap-2">
-          <p className="text-sm">Copyright © OtakuList 2025</p>
-        </aside>
-  
-        <nav className="flex items-center gap-4">
-          <a href="#" className="text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-              <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-            </svg>
-          </a>
-          <a href="#" className="text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-            </svg>
-          </a>
-          <a href="#" className="text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-              <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-            </svg>
-          </a>
-        </nav>
-      </footer>
-    );
-  };
-  
-  export default Footer;
-  
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="relative mt-auto">
+      {/* Top gradient border */}
+      <div className="h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+
+      <div className="relative bg-[#0a0a1a] pt-16 pb-8">
+        {/* Background decorations */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+            {/* Brand Section */}
+            <div className="lg:col-span-2">
+              <Link to="/" className="flex items-center gap-3 mb-4 group">
+                <span className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors duration-300">
+                  OtakuList
+                </span>
+              </Link>
+              <p className="text-gray-400 text-sm leading-relaxed max-w-md mb-6">
+                Your ultimate destination for discovering and exploring anime. 
+                Browse top anime, discover new characters, and find your next favorite series.
+              </p>
+              {/* Social Links */}
+              <div className="flex items-center gap-3">
+                {[
+                  { icon: FaTwitter, href: "#", color: "hover:text-blue-400", bg: "hover:bg-blue-400/10" },
+                  { icon: FaYoutube, href: "#", color: "hover:text-red-500", bg: "hover:bg-red-500/10" },
+                  { icon: FaFacebook, href: "#", color: "hover:text-blue-600", bg: "hover:bg-blue-600/10" },
+                  { icon: FaDiscord, href: "#", color: "hover:text-indigo-400", bg: "hover:bg-indigo-400/10" },
+                  { icon: FaGithub, href: "#", color: "hover:text-white", bg: "hover:bg-white/10" },
+                ].map((social, i) => (
+                  <a
+                    key={i}
+                    href={social.href}
+                    className={`p-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-400 ${social.color} ${social.bg} transition-all duration-300 hover:scale-110 hover:border-transparent`}
+                  >
+                    <social.icon size={18} />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                Quick Links
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  { label: "Home", path: "/" },
+                  { label: "Top Anime", path: "/#top-anime" },
+                  { label: "Top Characters", path: "/#top-characters" },
+                  { label: "Search", path: "/search" },
+                ].map((link, i) => (
+                  <li key={i}>
+                    <Link
+                      to={link.path}
+                      className="text-gray-400 hover:text-indigo-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-indigo-400 transition-colors duration-300" />
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="text-white font-semibold mb-4 text-sm uppercase tracking-wider">
+                Resources
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  { label: "MyAnimeList", href: "https://myanimelist.net" },
+                  { label: "API Documentation", href: "https://docs.api.jikan.moe" },
+                  { label: "About Us", href: "#" },
+                  { label: "Contact", href: "#" },
+                ].map((link, i) => (
+                  <li key={i}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-400 hover:text-indigo-400 transition-colors duration-300 text-sm flex items-center gap-2 group"
+                    >
+                      <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-indigo-400 transition-colors duration-300" />
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
+
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-gray-500 text-sm flex items-center gap-1.5">
+              © {currentYear} OtakuList. Made with{" "}
+              <FaHeart className="text-red-500 text-xs animate-pulse" /> for anime fans
+            </p>
+            <div className="flex items-center gap-6 text-sm text-gray-500">
+              <a href="#" className="hover:text-indigo-400 transition-colors duration-300">
+                Privacy Policy
+              </a>
+              <a href="#" className="hover:text-indigo-400 transition-colors duration-300">
+                Terms of Service
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
