@@ -1,7 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { FaArrowLeft, FaStar, FaHeart, FaPlay, FaExternalLinkAlt, FaCalendar, FaTv, FaFilm } from "react-icons/fa";
+import { FaArrowLeft, FaStar, FaHeart, FaPlay, FaExternalLinkAlt, FaCalendar, FaTv, FaFilm, FaComments } from "react-icons/fa";
 
 const API_BASE_URL = import.meta.env.VITE_ANIME_API_BASE_URL;
 
@@ -259,16 +260,25 @@ const AnimeDetails = () => {
               </p>
             </div>
 
-            {/* External Link */}
-            <a
-              href={anime.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary inline-flex"
-            >
-              <FaExternalLinkAlt className="text-sm" />
-              View on MyAnimeList
-            </a>
+            {/* Action Buttons */}
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={anime.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex"
+              >
+                <FaExternalLinkAlt className="text-sm" />
+                View on MyAnimeList
+              </a>
+              <Link
+                to={`/anime/${id}/forum`}
+                className="btn-secondary inline-flex"
+              >
+                <FaComments className="text-sm" />
+                Lihat Forum Diskusi
+              </Link>
+            </div>
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
+import { FaSearch, FaBars, FaTimes, FaComments } from "react-icons/fa";
 import { Link as ScrollLink } from "react-scroll";
 
 function Navbar() {
@@ -29,6 +29,9 @@ function Navbar() {
   };
 
   const isHomePage = location.pathname === "/";
+  // Deteksi apakah sedang di halaman detail anime (ada segment :id)
+  const animeDetailMatch = location.pathname.match(/^\/anime\/(\d+)/);
+  const currentAnimeId = animeDetailMatch ? animeDetailMatch[1] : null;
 
   return (
     <nav
@@ -81,6 +84,22 @@ function Navbar() {
                 className="relative text-gray-300 hover:text-white transition-colors duration-300 group"
               >
                 <span>Home</span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+              </Link>
+            )}
+
+            {/* Forum link — muncul saat di halaman detail anime */}
+            {currentAnimeId && (
+              <Link
+                to={`/anime/${currentAnimeId}/forum`}
+                className={`relative flex items-center gap-1.5 transition-colors duration-300 group ${
+                  location.pathname.includes("/forum")
+                    ? "text-indigo-400"
+                    : "text-gray-300 hover:text-white"
+                }`}
+              >
+                <FaComments className="text-sm" />
+                <span>Forum</span>
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
               </Link>
             )}
@@ -146,6 +165,22 @@ function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
+              </Link>
+            )}
+
+            {/* Mobile Forum link */}
+            {currentAnimeId && (
+              <Link
+                to={`/anime/${currentAnimeId}/forum`}
+                className={`flex items-center gap-2 py-2 transition-colors duration-300 ${
+                  location.pathname.includes("/forum")
+                    ? "text-indigo-400"
+                    : "text-gray-300 hover:text-white"
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <FaComments className="text-sm" />
+                Forum
               </Link>
             )}
 
