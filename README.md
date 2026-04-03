@@ -226,8 +226,6 @@ VITE_ANIME_API_BASE_URL=https://api.jikan.moe/v4
 |----------|---------------|------------|
 | `VITE_ANIME_API_BASE_URL` | `https://api.jikan.moe/v4` | Base URL Jikan API v4 |
 
-> ⚠️ **Penting:** Semua variabel environment di Vite **harus** diawali dengan `VITE_` agar bisa diakses di dalam kode React.
-
 ---
 
 ## 📖 Cara Menggunakan
