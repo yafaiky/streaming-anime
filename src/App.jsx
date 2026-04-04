@@ -9,7 +9,7 @@ import ForumPage from "./pages/ForumPage";
 const App = () => {
   return (
     <>
-      <Header /> {/* Tetap ada di semua halaman */}
+      <Header />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

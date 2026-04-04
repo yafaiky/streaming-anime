@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { FaArrowLeft, FaStar, FaHeart, FaPlay, FaExternalLinkAlt, FaCalendar, FaTv, FaFilm, FaComments } from "react-icons/fa";
+import AnimeNews from "./AnimeNews";
 
 const API_BASE_URL = import.meta.env.VITE_ANIME_API_BASE_URL;
 
@@ -302,6 +303,9 @@ const AnimeDetails = () => {
             </div>
           </div>
         )}
+
+        {/* Anime News Section */}
+        <AnimeNews animeId={id} />
       </div>
     </div>
   );
