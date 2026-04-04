@@ -32,11 +32,11 @@ const Footer = () => {
               {/* Social Links */}
               <div className="flex items-center gap-3">
                 {[
-                  { icon: FaTwitter, href: "#", color: "hover:text-blue-400", bg: "hover:bg-blue-400/10" },
-                  { icon: FaYoutube, href: "#", color: "hover:text-red-500", bg: "hover:bg-red-500/10" },
-                  { icon: FaFacebook, href: "#", color: "hover:text-blue-600", bg: "hover:bg-blue-600/10" },
-                  { icon: FaDiscord, href: "#", color: "hover:text-indigo-400", bg: "hover:bg-indigo-400/10" },
-                  { icon: FaGithub, href: "#", color: "hover:text-white", bg: "hover:bg-white/10" },
+                  // { icon: FaTwitter, href: "#", color: "hover:text-blue-400", bg: "hover:bg-blue-400/10" },
+                  // { icon: FaYoutube, href: "#", color: "hover:text-red-500", bg: "hover:bg-red-500/10" },
+                  // { icon: FaFacebook, href: "#", color: "hover:text-blue-600", bg: "hover:bg-blue-600/10" },
+                  // { icon: FaDiscord, href: "#", color: "hover:text-indigo-400", bg: "hover:bg-indigo-400/10" },
+                  { icon: FaGithub, href: "https://github.com/yafaiky/streaming-anime", color: "hover:text-white", bg: "hover:bg-white/10" },
                 ].map((social, i) => (
                   <a
                     key={i}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation, useParams } from "react-router-dom";
-import { FaSearch, FaBars, FaTimes, FaComments } from "react-icons/fa";
+import { FaSearch, FaBars, FaTimes, FaComments, FaBook, FaCalendarAlt, FaTag } from "react-icons/fa";
 import { Link as ScrollLink } from "react-scroll";
 
 function Navbar() {
@@ -103,6 +103,48 @@ function Navbar() {
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
               </Link>
             )}
+
+            {/* Magazines link — selalu tampil */}
+            <Link
+              to="/magazines"
+              className={`relative flex items-center gap-1.5 transition-colors duration-300 group ${
+                location.pathname === "/magazines"
+                  ? "text-indigo-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+            >
+              <FaBook className="text-sm" />
+              <span>Majalah</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+            </Link>
+
+            {/* Schedule link — selalu tampil */}
+            <Link
+              to="/schedule"
+              className={`relative flex items-center gap-1.5 transition-colors duration-300 group ${
+                location.pathname === "/schedule"
+                  ? "text-indigo-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+            >
+              <FaCalendarAlt className="text-sm" />
+              <span>Jadwal</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+            </Link>
+
+            {/* Genres link — selalu tampil */}
+            <Link
+              to="/genres"
+              className={`relative flex items-center gap-1.5 transition-colors duration-300 group ${
+                location.pathname === "/genres"
+                  ? "text-indigo-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+            >
+              <FaTag className="text-sm" />
+              <span>Genre</span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+            </Link>
           </div>
 
           {/* Search Bar */}
@@ -183,6 +225,48 @@ function Navbar() {
                 Forum
               </Link>
             )}
+
+            {/* Mobile Magazines link */}
+            <Link
+              to="/magazines"
+              className={`flex items-center gap-2 py-2 transition-colors duration-300 ${
+                location.pathname === "/magazines"
+                  ? "text-indigo-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <FaBook className="text-sm" />
+              Majalah
+            </Link>
+
+            {/* Mobile Schedule link */}
+            <Link
+              to="/schedule"
+              className={`flex items-center gap-2 py-2 transition-colors duration-300 ${
+                location.pathname === "/schedule"
+                  ? "text-indigo-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <FaCalendarAlt className="text-sm" />
+              Jadwal
+            </Link>
+
+            {/* Mobile Genres link */}
+            <Link
+              to="/genres"
+              className={`flex items-center gap-2 py-2 transition-colors duration-300 ${
+                location.pathname === "/genres"
+                  ? "text-indigo-400"
+                  : "text-gray-300 hover:text-white"
+              }`}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <FaTag className="text-sm" />
+              Genre
+            </Link>
 
             {/* Mobile Search */}
             <form onSubmit={handleSearchSubmit} className="relative mt-2">
