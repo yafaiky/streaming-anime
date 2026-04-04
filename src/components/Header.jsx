@@ -68,6 +68,16 @@ function Navbar() {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
                 </ScrollLink>
                 <ScrollLink
+                  to="top-manga"
+                  smooth={true}
+                  duration={500}
+                  offset={-80}
+                  className="relative text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 group"
+                >
+                  <span>Top Manga</span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+                </ScrollLink>
+                <ScrollLink
                   to="top-characters"
                   smooth={true}
                   duration={500}
@@ -79,13 +89,26 @@ function Navbar() {
                 </ScrollLink>
               </>
             ) : (
-              <Link
-                to="/"
-                className="relative text-gray-300 hover:text-white transition-colors duration-300 group"
-              >
-                <span>Home</span>
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
-              </Link>
+              <>
+                <Link
+                  to="/"
+                  className="relative text-gray-300 hover:text-white transition-colors duration-300 group"
+                >
+                  <span>Home</span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+                </Link>
+                <Link
+                  to="/manga"
+                  className={`relative transition-colors duration-300 group ${
+                    location.pathname === "/manga"
+                      ? "text-indigo-400"
+                      : "text-gray-300 hover:text-white"
+                  }`}
+                >
+                  <span>Manga</span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+                </Link>
+              </>
             )}
 
             {/* Forum link — muncul saat di halaman detail anime */}
@@ -128,45 +151,67 @@ function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
-        <div
-          className={`md:hidden overflow-hidden transition-all duration-500 ${
-            isMobileMenuOpen ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
-          }`}
-        >
-          <div className="flex flex-col gap-4 pt-4 border-t border-white/10">
-            {isHomePage ? (
-              <>
-                <ScrollLink
-                  to="top-anime"
-                  smooth={true}
-                  duration={500}
-                  offset={-80}
-                  className="text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Top Anime
-                </ScrollLink>
-                <ScrollLink
-                  to="top-characters"
-                  smooth={true}
-                  duration={500}
-                  offset={-80}
-                  className="text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Top Characters
-                </ScrollLink>
-              </>
-            ) : (
-              <Link
-                to="/"
-                className="text-gray-300 hover:text-white transition-colors duration-300 py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Home
-              </Link>
-            )}
+          <div
+            className={`md:hidden overflow-hidden transition-all duration-500 ${
+              isMobileMenuOpen ? "max-h-96 opacity-100 pb-6" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="flex flex-col gap-4 pt-4 border-t border-white/10">
+              {isHomePage ? (
+                <>
+                  <ScrollLink
+                    to="top-anime"
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    className="text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Top Anime
+                  </ScrollLink>
+                  <ScrollLink
+                    to="top-manga"
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    className="text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Top Manga
+                  </ScrollLink>
+                  <ScrollLink
+                    to="top-characters"
+                    smooth={true}
+                    duration={500}
+                    offset={-80}
+                    className="text-gray-300 hover:text-white cursor-pointer transition-colors duration-300 py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Top Characters
+                  </ScrollLink>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/"
+                    className="text-gray-300 hover:text-white transition-colors duration-300 py-2"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Home
+                  </Link>
+                  <Link
+                    to="/manga"
+                    className={`py-2 transition-colors duration-300 ${
+                      location.pathname === "/manga"
+                        ? "text-indigo-400"
+                        : "text-gray-300 hover:text-white"
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Manga
+                  </Link>
+                </>
+              )}
 
             {/* Mobile Forum link */}
             {currentAnimeId && (
